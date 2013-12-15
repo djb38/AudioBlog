@@ -222,3 +222,4 @@ tmp/
 webroot/files
 webroot/img
 Config/database.php
+Plugin/DebugKit/

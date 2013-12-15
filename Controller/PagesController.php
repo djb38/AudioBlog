@@ -37,6 +37,15 @@ class PagesController extends AppController {
 	public $uses = array();
 
 /**
+ * Disallow non-logged-in users from visiting pages beginning with /admin/
+ */
+	public function beforeFilter() {
+		if(strpos($this->request->url, 'admin') === false) {
+            $this->Auth->allow();
+        }
+	}
+
+/**
  * Displays a view
  *
  * @param mixed What page to display

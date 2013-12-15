@@ -30,4 +30,30 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	public $components = array(
+        'DebugKit.Toolbar',
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => array('controller' => 'pages', 'action' => 'display', 'admin_home'),
+           	'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+           	'loginAction' => array('controller'=>'users', 'action'=>'login', 'admin' => false),
+			'authError' => 'Admin Area',
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email')
+                )
+            )
+        )
+    );
+
+/**
+ * Only allow non-logged-in visitors from going to pages that are not routed to /admin/
+ */
+    public function beforeFilter() {
+        if(!isset($this->params['prefix'])) {
+            $this->Auth->allow();
+        }
+    }
+
+    
 }

@@ -40,6 +40,7 @@ class RecordingsController extends AppController {
 
 	    if (!$this->request->data) {
 	        $this->request->data = $recording;
+	    	$this->set('recording', $recording);
 	    }
 	}
 
